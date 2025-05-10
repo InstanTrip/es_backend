@@ -42,6 +42,8 @@ class ElasticSearch:
 
         # 같은날 검색 횟수 카운트
         self.search_count = 0
+
+        self.search_time = 0
     
     def set_query(self, query_category: str, query: list) -> None:
         """ 쿼리 설정 """
@@ -80,8 +82,10 @@ class ElasticSearch:
     
     def next_day(self) -> None:
         """ 다음날로 설정 """
+        LOGGER.info(f"{self.target_date.strftime('%Y-%m-%d')} - ES 쿼리 처리 시간 {self.search_time}ms")
         self.target_date = self.target_date + datetime.timedelta(days=1)
         self.search_count = 0
+        self.search_time = 0
 
     def accommodation_search(self, lat: float = 0, lon: float = 0) -> dict:
         """ 숙소 검색 """
@@ -173,7 +177,8 @@ class ElasticSearch:
 
         # 테스트 검색 후 출력
         res = self.elastic_client.search(index="elastic_accommodation", body=search_query)
-        LOGGER.info(f"검색 속도: {res['took']}ms")
+        # LOGGER.info(f"검색 속도: {res['took']}ms")
+        self.search_time += res['took']
         # for i in res["hits"]["hits"]:
         #     # print(i)
         #     print(f"{i['_score']}점 {i['_source']['title']}")
@@ -373,7 +378,8 @@ class ElasticSearch:
         # 테스트 검색 후 출력
         res = self.elastic_client.search(index="elastic_destination", body=search_query)
         # print(len(res["hits"]["hits"]))
-        LOGGER.info(f"검색 속도: {res['took']}ms")
+        # LOGGER.info(f"검색 속도: {res['took']}ms")
+        self.search_time += res['took']
         # for i in res["hits"]["hits"]:
         #     # print(i)
         #     print(f"{i['_score']}점 {i['_source']['title']}")
@@ -561,7 +567,8 @@ class ElasticSearch:
         # 테스트 검색 후 출력
         res = self.elastic_client.search(index="elastic_restaurant", body=search_query)
         # print(len(res["hits"]["hits"]))
-        LOGGER.info(f"검색 속도: {res['took']}ms")
+        # LOGGER.info(f"검색 속도: {res['took']}ms")
+        self.search_time += res['took']
         # for i in res["hits"]["hits"]:
         #     # print(i)
         #     print(f"{i['_score']}점 {i['_source']['title']} | 블루리본 {i['_source']['ribbon_count']}개")
