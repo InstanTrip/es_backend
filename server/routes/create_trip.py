@@ -80,7 +80,7 @@ async def create_trip(data: CreateTripData):
             {
                 "destination_type": "elastic_restaurant",
                 "destination_id": breakfast["id"],
-                "meno": ""
+                "memo": ""
             }
         )
 
@@ -91,7 +91,7 @@ async def create_trip(data: CreateTripData):
             {
                 "destination_type": "elastic_destination",
                 "destination_id": destination["id"],
-                "meno": ""
+                "memo": ""
             }
         )
 
@@ -102,7 +102,7 @@ async def create_trip(data: CreateTripData):
             {
                 "destination_type": "elastic_restaurant",
                 "destination_id": lunch["id"],
-                "meno": ""
+                "memo": ""
             }
         )
 
@@ -113,7 +113,7 @@ async def create_trip(data: CreateTripData):
             {
                 "destination_type": "elastic_destination",
                 "destination_id": destination["id"],
-                "meno": ""
+                "memo": ""
             }
         )
 
@@ -124,7 +124,7 @@ async def create_trip(data: CreateTripData):
             {
                 "destination_type": "elastic_restaurant",
                 "destination_id": dinner["id"],
-                "meno": ""
+                "memo": ""
             }
         )
 
@@ -135,7 +135,7 @@ async def create_trip(data: CreateTripData):
             {
                 "destination_type": "elastic_destination",
                 "destination_id": destination["id"],
-                "meno": ""
+                "memo": ""
             }
         )
 
@@ -146,7 +146,7 @@ async def create_trip(data: CreateTripData):
             {
                 "destination_type": "elastic_accommodation",
                 "destination_id": accommodation["id"],
-                "meno": ""
+                "memo": ""
             }
         )
 
