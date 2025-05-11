@@ -6,7 +6,7 @@ from server.routes import create_trip
 from server import WEB_HOST, WEB_PORT
 
 origins = ["*",]
-app = FastAPI()
+app = FastAPI(root_path="/pyapi")
 
 app.add_middleware(
     CORSMiddleware,
