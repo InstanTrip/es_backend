@@ -1,5 +1,5 @@
 import datetime
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from elasticsearch import Elasticsearch
 
 from server.models.create_trip import CreateTripData
