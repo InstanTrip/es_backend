@@ -63,6 +63,14 @@ async def get_location(data: LocationList):
         if temp.get("id"):
             temp["id"] = str(temp["id"])
         
+        if temp["type"] == "elastic_restaurant":
+            # 이미지 데이터 가공
+            if temp.get("image"):
+                tmp_img = []
+                for img in temp["image"]:
+                    tmp_img.append("https://www.bluer.co.kr" + img)
+            temp["image"] = tmp_img
+        
         return_data.append(temp)
     
     # data와 순서 맞추기
