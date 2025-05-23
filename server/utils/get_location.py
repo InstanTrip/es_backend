@@ -66,7 +66,7 @@ async def get_location(data: LocationList):
         return_data.append(temp)
     
     # data와 순서 맞추기
-    return_data = sorted(return_data, key=lambda x: data.ids.index({"type": x["destination_type"], "id": x["id"]}))
+    return_data = sorted(return_data, key=lambda x: data.ids.index({"type": x["type"], "id": x["id"]}))
     
     await es_client.close()
 
