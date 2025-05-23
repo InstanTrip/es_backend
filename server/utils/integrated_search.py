@@ -117,6 +117,12 @@ async def integrated_search(query: str, lat: float, lon: float):
             if data_image and type(data_image) != list:
                 data_image = [data_image]
             
+            if data_image and j["_index"] == "elastic_restaurant":
+                tmp_img = []
+                for img in data_image:
+                    tmp_img.append("https://www.bluer.co.kr" + img)
+                data_image = tmp_img
+            
             data_address = temp.get("address")
 
             data_postal_code = temp.get("postal_code")
