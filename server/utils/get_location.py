@@ -69,7 +69,7 @@ async def get_location(data: LocationList):
                 tmp_img = []
                 for img in temp["image"]:
                     tmp_img.append("https://www.bluer.co.kr" + img)
-            temp["image"] = tmp_img
+                temp["image"] = tmp_img
         
         return_data.append(temp)
     
