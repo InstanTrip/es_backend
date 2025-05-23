@@ -57,7 +57,14 @@ async def get_location(data: LocationList):
         if temp.get("description_vector"):
             del temp["description_vector"]
         
+        # id값을 string으로 변환
+        if temp.get("id"):
+            temp["id"] = str(temp["id"])
+        
         return_data.append(temp)
+    
+    # data와 순서 맞추기
+    return_data = sorted(return_data, key=lambda x: data.ids.index({"type": x["destination_type"], "id": x["id"]}))
     
     await es_client.close()
 
