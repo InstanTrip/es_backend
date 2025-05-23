@@ -50,6 +50,8 @@ async def get_location(data: LocationList):
     return_data = []
     for i in response["responses"]:
         temp = i["hits"]["hits"][0]["_source"]
+        temp["type"] = i["hits"]["hits"][0]["_index"]
+
         if temp.get("title_vector"):
             del temp["title_vector"]
         if temp.get("category_vector"):
