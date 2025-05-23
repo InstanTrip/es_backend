@@ -4,6 +4,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from server.routes import create_trip
 from server.routes import get_location_data
+from server.routes import search_location
 
 from server import WEB_HOST, WEB_PORT
 
@@ -19,6 +20,7 @@ app.add_middleware(
 
 app.include_router(create_trip.router)
 app.include_router(get_location_data.router)
+app.include_router(search_location.router)
 
 if __name__ == "__main__":
     uvicorn.run(app, host=WEB_HOST, port=WEB_PORT)

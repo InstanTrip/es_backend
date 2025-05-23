@@ -2,7 +2,6 @@ import random
 import datetime
 
 from elasticsearch import Elasticsearch
-from sentence_transformers import SentenceTransformer
 
 from server import vectorizer
 from server import ES_HOST, ES_PORT

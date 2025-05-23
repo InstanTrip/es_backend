@@ -8,5 +8,8 @@ router = APIRouter(prefix="")
 
 @router.post("/get-location-data/")
 async def get_location_data(data: LocationList):
+    """
+    id로 장소 정보 가져오기
+    """
     res = await get_location(data)
     return res
