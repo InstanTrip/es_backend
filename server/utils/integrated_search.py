@@ -12,7 +12,7 @@ async def integrated_search(query: str, lat: float, lon: float):
 
     # 검색 쿼리
     search_query = {
-        "size": 30,
+        "size": 15,
         "query": {
             "function_score": {
                 "query": {
@@ -139,6 +139,10 @@ async def integrated_search(query: str, lat: float, lon: float):
     
     # 스코어값 기준 정렬
     return_data = sorted(return_data, key=lambda x: x["score"], reverse=True)
+
+    # 최대 15개만 리턴
+    if len(return_data) > 15:
+        return_data = return_data[:15]
 
     await es.close()
     return return_data
