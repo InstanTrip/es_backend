@@ -432,7 +432,14 @@ class ElasticSearch:
                                     },
                                 }
                             ],
-                            "should": []
+                            "should": [],
+                            "must_not": [
+                                {
+                                    "match_phrase": {
+                                        "title": "장례식장"
+                                    }
+                                }
+                            ]
                         }
                     },
                     "functions": [],
