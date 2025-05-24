@@ -187,9 +187,9 @@ class ElasticSearch:
         pick_res = None
         for i in res["hits"]["hits"]:
             # 중복 방지
-            if i["_id"] in self.restaurant_list:
+            if i["_id"] in self.accommodation_list:
                 continue
-            self.restaurant_list.append(i["_id"])
+            self.accommodation_list.append(i["_id"])
 
             pick_res = i
         
@@ -387,9 +387,9 @@ class ElasticSearch:
         pick_res = None
         for i in res["hits"]["hits"]:
             # 중복 방지
-            if i["_id"] in self.restaurant_list:
+            if i["_id"] in self.destination_list:
                 continue
-            self.restaurant_list.append(i["_id"])
+            self.destination_list.append(i["_id"])
 
             pick_res = i
         
