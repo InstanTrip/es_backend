@@ -11,5 +11,5 @@ async def search_location(data: Search):
     """
     통합검색
     """
-    res = await integrated_search(data.query, data.lat, data.lon)
+    res = await integrated_search(data.query, data.location, data.lat, data.lon)
     return res

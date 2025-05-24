@@ -4,7 +4,7 @@ from server import ES_HOST, ES_PORT
 from server import vectorizer
 
 
-async def integrated_search(query: str, lat: float, lon: float):
+async def integrated_search(query: str, location: str, lat: float, lon: float):
     """
     통합 검색
     """
@@ -17,6 +17,9 @@ async def integrated_search(query: str, lat: float, lon: float):
             "function_score": {
                 "query": {
                     "bool": {
+                        "filter": [
+                            {"match_phrase": {"address": location}}
+                        ],
                         "should": []
                     }
                 },
