@@ -184,7 +184,7 @@ class ElasticSearch:
 
     
         # 검색 결과가 없을 경우
-        if res["hits"]["hits"] and len(res["hits"]["hits"]) == 0:
+        if len(res["hits"]["hits"]) == 0:
             return {
                 "id": "-1",
                 "lat": lat,
@@ -204,7 +204,7 @@ class ElasticSearch:
         if not pick_res and res["hits"]["hits"]:
             # 전부 중복일 경우 적당히 랜덤으로 선택
             pick_res = random.choice(res["hits"]["hits"])
-            
+
         return_data = {
             "id": str(pick_res["_id"]),
             "lat": pick_res["_source"]["location"]["lat"],
@@ -392,7 +392,7 @@ class ElasticSearch:
         #     print(f"{i['_score']}점 {i['_source']['title']}")
 
         # 검색 결과가 없을 경우
-        if res["hits"]["hits"] and len(res["hits"]["hits"]) == 0:
+        if len(res["hits"]["hits"]) == 0:
             return {
                 "id": "-1",
                 "lat": lat,
@@ -597,7 +597,7 @@ class ElasticSearch:
         
 
         # 검색 결과가 없을 경우
-        if res["hits"]["hits"] and len(res["hits"]["hits"]) == 0:
+        if len(res["hits"]["hits"]) == 0:
             return {
                 "id": "-1",
                 "lat": lat,

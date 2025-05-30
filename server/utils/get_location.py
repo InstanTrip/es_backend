@@ -86,16 +86,16 @@ async def get_location(data: LocationList):
             {
                 "type": data.ids[i].type,
                 "id": data.ids[i].id,
-                "name": "찾을 수 없어요",
+                "title": "찾을 수 없어요",
                 "description": "",
                 "image": [],
                 "address": "",
-                "latitude": 0.0,
-                "longitude": 0.0
+                "location": {
+                    "lat": 0.0,
+                    "lon": 0.0
+                }
             }
         )
-    
-    print("return_data", return_data)
     
     # data와 순서 맞추기
     return_data = sorted(
