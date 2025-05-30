@@ -183,6 +183,14 @@ class ElasticSearch:
         #     print(f"{i['_score']}점 {i['_source']['title']}")
 
     
+        # 검색 결과가 없을 경우
+        if res["hits"]["hits"] and len(res["hits"]["hits"]) == 0:
+            return {
+                "id": "-1",
+                "lat": lat,
+                "lon": lon
+            }
+
         # 순서대로 선택, 중복제거, 중복값은 id만 넣고 비교
         pick_res = None
         for i in res["hits"]["hits"]:
@@ -383,6 +391,14 @@ class ElasticSearch:
         #     # print(i)
         #     print(f"{i['_score']}점 {i['_source']['title']}")
 
+        # 검색 결과가 없을 경우
+        if res["hits"]["hits"] and len(res["hits"]["hits"]) == 0:
+            return {
+                "id": "-1",
+                "lat": lat,
+                "lon": lon
+            }
+
         # 순서대로 선택, 중복제거, 중복값은 id만 넣고 비교
         pick_res = None
         for i in res["hits"]["hits"]:
@@ -579,6 +595,14 @@ class ElasticSearch:
         #     # print(i)
         #     print(f"{i['_score']}점 {i['_source']['title']} | 블루리본 {i['_source']['ribbon_count']}개")
         
+
+        # 검색 결과가 없을 경우
+        if res["hits"]["hits"] and len(res["hits"]["hits"]) == 0:
+            return {
+                "id": "-1",
+                "lat": lat,
+                "lon": lon
+            }
 
         # 순서대로 선택, 중복제거, 중복값은 id만 넣고 비교
         pick_res = None

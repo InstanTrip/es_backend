@@ -1,5 +1,3 @@
-import time
-import asyncio
 from elasticsearch import AsyncElasticsearch
 
 from server.models.locations import LocationList
@@ -9,6 +7,7 @@ async def get_location(data: LocationList):
     """
     id기반 여행지 데이터 가져오기
     """
+
     es_client = AsyncElasticsearch(f"http://{ES_HOST}:{ES_PORT}")
 
     # data = [
@@ -16,6 +15,12 @@ async def get_location(data: LocationList):
     #     {"type": "elastic_destination", "id": "11519"},
     #     {"type": "elastic_restaurant", "id": "5070000-101-2004-00238"}
     # ]
+
+    not_found_count = 0
+    for i in data.ids:
+        # id값이 -1 인 경우 개수
+        if i.id == "-1":
+            not_found_count += 1
 
     queries = {
         "elastic_restaurant": [],
@@ -49,6 +54,9 @@ async def get_location(data: LocationList):
     # 벡터값 제거
     return_data = []
     for i in response["responses"]:
+        if len(i["hits"]["hits"]) <= 0:
+            continue
+
         temp = i["hits"]["hits"][0]["_source"]
         temp["type"] = i["hits"]["hits"][0]["_index"]
 
@@ -72,6 +80,22 @@ async def get_location(data: LocationList):
                 temp["image"] = tmp_img
         
         return_data.append(temp)
+
+    for i in range(not_found_count):
+        return_data.append(
+            {
+                "type": data.ids[i].type,
+                "id": data.ids[i].id,
+                "name": "찾을 수 없어요",
+                "description": "",
+                "image": [],
+                "address": "",
+                "latitude": 0.0,
+                "longitude": 0.0
+            }
+        )
+    
+    print("return_data", return_data)
     
     # data와 순서 맞추기
     return_data = sorted(
