@@ -96,16 +96,18 @@ async def get_location(data: LocationList):
                 }
             }
         )
-    
+
     # data와 순서 맞추기
-    return_data = sorted(
-        return_data, 
-        key=lambda x: next(
-            index for index, item in enumerate(data.ids) 
-            if item.type == x["type"] and item.id == x["id"]
-        )
-    )
+    return_data_sorted = []
+    for i in data.ids:
+        for j in return_data:
+            if i.type == j["type"] and i.id == j["id"]:
+                return_data_sorted.append(j)
+                break
+
+
+
 
     await es_client.close()
 
-    return return_data
+    return return_data_sorted
